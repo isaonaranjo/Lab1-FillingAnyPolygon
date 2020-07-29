@@ -52,10 +52,11 @@ class Render(object):
     # función glClear() 
     def glClear(self):
         self.framebuffer = [ [ self.clear_color for x in range(self.width)] for y in range(self.height) ]
+
     # funcion glLine
     def glLine(self, x0, y0, x1, y1):
-        x0 = round(( x0 + 1) * (self.viewPortWidth   / 2 ) + self.xViewPort)
-        x1 = round(( x1 + 1) * (self.viewPortWidth   / 2 ) + self.xViewPort)
+        x0 = round(( x0 + 1) * (self.viewPortWidth / 2 ) + self.xViewPort)
+        x1 = round(( x1 + 1) * (self.viewPortWidth / 2 ) + self.xViewPort)
         y0 = round(( y0 + 1) * (self.viewPortHeight / 2 ) + self.yViewPort)
         y1 = round(( y1 + 1) * (self.viewPortHeight / 2 ) + self.yViewPort)
 
@@ -130,7 +131,6 @@ class Render(object):
     def glClearColor(self, r, g, b):
         self.clear_color = color(r,g,b)
 
-
     def glColor(self, r=0.5, g=0.5, b=0.5):
         self.curr_color = color(r,g,b)
 
@@ -175,13 +175,11 @@ class Render(object):
         f.close()
 
     def drawPoligono(self, points):
-
         count = len(points)
 
         for i in range(count):
             v0 = points[i]
             v1 = points[(i+1)%count]
-
             self.glLine_coord(v0[0], v0[1], v1[0], v1[1])
 
     # Funcion tomada del blog citado arriba, pagina 35
@@ -198,7 +196,7 @@ class Render(object):
             self.Inundacion(x, y+1, r, g, b)
             #self.Inundacion(x-1, y, r, g, b)
             self.Inundacion(x, y-1, r, g, b)    
-# Lineas 
+# dibujo 
 r = Render(1000,500)
 r.glColor(1, 1, 1)
 
@@ -214,22 +212,17 @@ r.drawPoligono(poly3)
 r.drawPoligono(poly4)
 r.drawPoligono(poly5)
 
-# Poligono 1 - Estrella
-r.Inundacion(168, 379, 0.5, 0.89, 0.42)
+r.Inundacion(168, 379, 0.5, 0.89, 0.42) # Estrella
 r.Inundacion(182, 332, 0.5, 0.89, 0.42)
 
-# Poligono 2 - Rombo
-r.Inundacion(289, 286, 0.8, 0.12, 0.34)
+r.Inundacion(289, 286, 0.8, 0.12, 0.34) # Rombo
 
-# Poligono 3 - Triangulo
-r.Inundacion(379, 248, 0.99, 0.87, 0.2)
+r.Inundacion(379, 248, 0.99, 0.87, 0.2) # Triangulo
 
-# Poligono 4 - Tetera
-r.Inundacion(418, 176, 0.54, 0.34, 0.76)
+r.Inundacion(418, 176, 0.54, 0.34, 0.76) # Tetera
 r.Inundacion(582, 229, 0.54, 0.34, 0.76)
 r.Inundacion(537, 37, 0.54, 0.34, 0.76)
 
-# Poligono 5 - Agujero de Tetera
-r.Inundacion(683, 174, 0.56, 0.7, 0.75)
+r.Inundacion(683, 174, 0.56, 0.7, 0.75) # Agujero
 
-r.glFinish('output.bmp')
+r.glFinish('Final.bmp')
